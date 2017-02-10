@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AcquirerTrxReq version="1.0.0" productID="${product_id}">
+    <createDateTimestamp>${timestamp}</createDateTimestamp>
+    <Merchant>
+        <merchantID>${merchant_id}</merchantID>
+        <subID>${merchant_sub_id}</subID>
+        <merchantReturnURL>${merchant_return_url}</merchantReturnURL>
+    </Merchant>
+    <Issuer>
+        <issuerID>${issuer_id}</issuerID>
+    </Issuer>
+    <Transaction>
+        <expirationPeriod>${expiration_period}</expirationPeriod>
+        <language>${language}</language>
+        <entranceCode>${entrance_code}</entranceCode>
+        <container>
+            ${content}
+        </container>
+    </Transaction>
+</AcquirerTrxReq>
