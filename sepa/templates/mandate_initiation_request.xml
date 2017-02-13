@@ -1,0 +1,51 @@
+<%namespace name="util" file="util.xml" />
+
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.009.001.04" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <MndtInitnReq>
+        <GrpHdr>
+            <MsgId>${message_id}</MsgId>
+            <CreDtTm>${creation_datetime}</CreDtTm>
+            <%util:multiple data="${authorisation}" args="element">
+                <Authstn>${element}</Authstn>\
+            </%util:multiple>
+            % if hasattr(self, 'initiating_party'):
+                <InitgPty>${self.initiating_party}</InitgPty>
+            % endif
+            % if hasattr(self, 'instructing_party'):
+                <InstgAgt>${self.instructing_party}</InstgAgt>
+            % endif
+            % if hasattr(self, 'instructed_party'):
+                <InstdAgt>${self.instructed_party}</InitgPty>
+            % endif
+        </GrpHdr>
+        <%util:multiple data="${mandates}" args="element">
+            <Mndt>
+                <%util:optional data="${element.id}">
+                    <MndtId>${element.id}</MndtId>
+                </%util:optional>
+                <MndtReqId>${element.request_id}</MndtReqId>
+
+                <%util:optional data="${element.authentication}">
+                    <Authntcn>
+                        <%util:optional data="${element.authentication.code}">
+                            <MsgAuthntcnCd>${element.authentication.code}</MsgAuthntcnCd>
+                        </%util:optional>
+                        <%util:optional data="${element.authentication.date}">
+                            <Dt>${element.authentication.date}</Dt>
+                        </%util:optional>
+                        <%util:optional data="${element.authentication.channel}">
+                            <Chanl>
+                                <%util:optional data="${element.authentication.channel.code}">
+                                    <Cd>${element.authentication.channel.code}</Cd>
+                                </%util:optional>
+                                <%util:optional data="${element.authentication.channel.proprietary}">
+                                    <Prtry>${element.authentication.channel.proprietary}</Prtry>
+                                </%util:optional>
+                            </Chanl>
+                        </%util:optional>
+                    </Authntcn>
+                </%util:optional>
+            </Mndt>
+        </%util:multiple>
+    </MndtInitnReq>
+</Document>

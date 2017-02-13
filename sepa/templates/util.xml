@@ -1,17 +1,17 @@
 <%def name="multiple(data)">
-    % if data:
-        % if isinstance([], data):
-            % for element of data:
+    % if data is not None:
+        % if isinstance(data, list):
+            % for element in data:
                 ${caller.body(element=element)}
             % endfor
-        % else
+        % else:
             ${caller.body(element=data)}
         % endif
     % endif
 </%def>
 
 <%def name="optional(data)">
-    % if data:
+    % if data is not None:
         ${caller.body()}
     % endif
 </%def>
