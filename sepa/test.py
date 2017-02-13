@@ -1,18 +1,8 @@
-from os import path
-from mako.lookup import TemplateLookup
+from lxml import etree
+from group_header import GroupHeader
 
-templates = TemplateLookup(directories=['templates'], strict_undefined=True)
-template = templates.get_template('mandate_initiation_request.xml');
+header = GroupHeader(message_id='123456', creation_datetime='now', instructing_party='MyVCK')
 
-data = {
-    'message_id': 123,
-    'creation_datetime': 'somedate',
-    'authorisation': [
-        'test1',
-        'test2'
-    ],
-    'instructing_party': 'MyVCK',
-    'mandates': []
-}
+# doc = etree.ElementTree(header.build())
 
-print(template.render(**data))
+print(etree.tostring(header.build()))
