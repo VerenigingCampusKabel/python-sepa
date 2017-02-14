@@ -44,3 +44,60 @@ mandate = Mandate(request_identification='req', tracking_indicator='track', cred
 
 print(xml_to_string(builder(header)))
 print(xml_to_string(builder(mandate)))
+
+mandate2 = {
+    'id': '1234567890'
+    'request_id': 'NOTPROVIDED',
+    'type': {
+        'service_level': {
+            'code': 'SEPA'
+        },
+        'local_instrument': {
+            'code': 'CORE'
+        }
+    },
+    'occurrences': {
+        'sequence_type': 'OOFF'
+    },
+    'creditor': None,
+    'debtor': {
+        'id': {
+            'private_identifier': {
+                'other': {
+                    'id': '12345-67890'
+                }
+            }
+        }
+    },
+    'debtor_agent': {
+        'financial_instance_identifier': {
+            'bicfi': 'TESTNL2A'
+        }
+    }
+}
+
+mappings = {
+    'id': 'MndtId',
+    'request_id': 'MndtReqId',
+    'type': {
+        '_self': 'Tp',
+        'service_level': {
+            '_self': 'SvcLvl',
+            'code': 'Cd',
+            'proprietary': 'Prpty'
+        }
+    }
+}
+
+reverse_mappings = {
+    'MndtId': 'id',
+    'MndtReqId': 'request_id',
+    'Tp': {
+        '_self': 'type',
+        'SvcLvl': {
+            '_self': 'service_level',
+            'Cd': 'code',
+            'Prpty': 'proprietary'
+        }
+    }
+}

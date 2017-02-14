@@ -1,4 +1,3 @@
-from lxml import etree
 from util import code_or_proprietary
 
 class Mandate:

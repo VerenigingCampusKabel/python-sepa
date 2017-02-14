@@ -1,5 +1,3 @@
-from lxml import etree
-
 class GroupHeader:
     def __init__(self, message_id, creation_datetime, authorisation = None, initiating_party = None, instructing_party = None, instructed_party = None):
         self.message_id = message_id
