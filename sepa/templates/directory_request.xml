@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DirectoryReq version="1.0.0" productID="${product_id}">
-    <createDateTimestamp>${timestamp}</createDateTimestamp>
-    <Merchant>
-        <merchantID>${merchant_id}</merchantID>
-        <subID>${merchant_sub_id}</subID>
-    </Merchant>
-</DirectoryReq>
