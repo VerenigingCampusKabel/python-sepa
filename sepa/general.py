@@ -31,7 +31,7 @@ def address(tag):
 
 def party(tag):
     return {
-        '_self': tag
+        '_self': tag,
         'name': 'Nm',
         'postal_address': address('PstlAdr'),
         'id': {
