@@ -30,6 +30,7 @@ mandate_amendment_request = {
         },
         'mandate': mandate('Mndt'),
         'original_mandate': {
+            '_self': 'OrgnlMsgInf',
             'id': 'OrgnlMndtId',
             'mandate': mandate(' OrgnMndt')
         },
@@ -51,6 +52,7 @@ mandate_cancellation_request = {
             'additional_information': ['AddtInf']
         },
         'original_mandate': {
+            '_self': 'OrgnlMsgInf',
             'id': 'OrgnlMndtId',
             'mandate': mandate(' OrgnMndt')
         },

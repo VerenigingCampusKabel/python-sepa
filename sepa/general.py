@@ -35,6 +35,7 @@ def party(tag):
         'name': 'Nm',
         'postal_address': address('PstlAdr'),
         'id': {
+            '_self': 'Id',
             'organisation': {
                 '_self': 'OrgId',
                 'any_bic': 'AnyBIC',

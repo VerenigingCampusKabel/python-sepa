@@ -13,3 +13,46 @@ Python library for parsing and building SEPA Direct Debit and SEPA eMandate sche
 - [ ] Mandate Acceptance Report v5 (pain.012.001.05)
 - [ ] Mandate Copy Request v1 (pain.017.001.01)
 - [ ] Mandate Suspension Request v1 (pain.018.001.01)
+
+## Usage
+### Building messages
+```python
+from sepa import builder
+
+data_in = {
+    'group_header': {},
+    'mandate': [{
+        'id': '78904536',
+        'request_id': '9823701',
+        'authentication': {
+            'date': '2017-03-05',
+            'channel': {
+                'code': 'ABC'
+            }
+        }
+    }]
+}
+
+data_out = builder.build(builder.mandate_initation_request, data_in)
+print(data_out)
+```
+
+### Parsing messages
+```python
+from sepa import parser
+
+data_in = ('<MndtInitnReq>'
+    '<GrpHdr></GrpHdr>'
+    '<Mndt>'
+        '<MndtId>78904536</MndtdId>'
+        '<MndtReqId>9823701</MndtReqId>'
+        '<Authntcn>'
+            '<Dt>2017-03-05</Dt>'
+            '<Chanl><Cd>ABC</Cd></Chanl>'
+        '</Authntcn>'
+    '</Mndt>'
+'</MndtInitnReq>')
+
+data_out = parser.parse(parser.mandate_initation_request, data_in)
+print(data_out)
+```
