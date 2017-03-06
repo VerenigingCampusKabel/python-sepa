@@ -1,7 +1,11 @@
-from lxml import etree
-import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from .context.sepa import builder, parser
+import unittest
+from lxml import etree
+from sepa import builder, parser
+from util import xml_compare
 
 data_object = {
     'group_header': {
@@ -14,12 +18,12 @@ data_object = {
     'mandate': [{
         'id': '78904536',
         'request_id': '9823701',
-        'authentication': {
+        'authentication': [{
             'date': '2017-03-05',
             'channel': {
                 'code': 'ABC'
             }
-        }
+        }]
     }]
 }
 
@@ -43,17 +47,14 @@ data_xml = ('<MndtInitnReq>'
     '</GrpHdr>'
 '</MndtInitnReq>')
 
-# TODO: compare without ordering (through etree maybe)?
-
 class TestSuite(unittest.TestSuite):
     def test_builder(self):
         data_out = builder.build(builder.mandate_initation_request, data_object)
-        assert data_out == data_xml
+        assert xml_compare(data_out, etree.fromstring(data_xml))
 
     def test_parser(self):
-        data_out = parser.parse(parser.mandate_initation_request, etree.fromstring(etree.tostring(data_out)))
-        # TODO: deep compare
+        data_out = parser.parse(parser.mandate_initation_request, etree.fromstring(data_xml))
         assert data_out == data_object
 
-if __name__ == '__main__'
+if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,5 @@
-from general import code_or_proprietary, group_header, party
-from mandate import mandate
+from .general import code_or_proprietary, group_header, party
+from .mandate import mandate
 
 def original_message(tag):
     return {

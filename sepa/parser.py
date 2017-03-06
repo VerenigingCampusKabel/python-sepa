@@ -1,5 +1,5 @@
 from lxml import etree
-import messages
+from .messages import mandate_initation_request as mir, mandate_amendment_request as mar, mandate_cancellation_request as mcr
 
 def reverse(structure, name = ''):
     new_structure = {
@@ -16,19 +16,19 @@ def reverse(structure, name = ''):
                 else:
                     new_structure[sub[0]] = [child]
             elif isinstance(sub, dict):
-                if '_self' in sub:
-                    new_structure[sub['_self']] = reverse(sub, child)
-                else:
-                    print('WEIRD WEIRD', child, sub)
+                # if '_self' in sub:
+                new_structure[sub['_self']] = reverse(sub, child)
+                # else:
+                    # print('WEIRD WEIRD', child, sub)
             else:
                 new_structure[sub] = child
 
     return new_structure
 
 # Reverse message structures
-mandate_initation_request = reverse(messages.mandate_initation_request)
-mandate_amendment_request = reverse(messages.mandate_amendment_request)
-mandate_cancellation_request = reverse(messages.mandate_cancellation_request)
+mandate_initation_request = reverse(mir)
+mandate_amendment_request = reverse(mar)
+mandate_cancellation_request = reverse(mcr)
 
 def parse(structure, tag):
     data = {}
@@ -37,16 +37,16 @@ def parse(structure, tag):
         substructure = structure[child.tag]
 
         if isinstance(substructure, list):
-            print(substructure[0])
+            # print(substructure[0])
             if isinstance(substructure[0], dict):
                 key = substructure[0]['_self']
                 value = parse(substructure[0], child)
             else:
-                print('NOPENOPENOPE', type(substructure[0]))
+                # print('NOPENOPENOPE', type(substructure[0]))
                 key = substructure[0]
                 value = child.text
 
-            print(child.tag, key)
+            # print(child.tag, key)
             if not key in data:
                 data[key] = []
             data[key].append(value)

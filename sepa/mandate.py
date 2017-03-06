@@ -1,4 +1,4 @@
-from general import code_or_proprietary, other, address, party, account, agent
+from .general import code_or_proprietary, other, address, party, account, agent
 
 def mandate(tag):
     return {
