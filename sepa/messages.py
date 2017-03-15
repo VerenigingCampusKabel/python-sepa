@@ -10,6 +10,10 @@ def original_message(tag):
     }
 
 mandate_initation_request = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:pain.009.001.05',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
     '_self': 'MndtInitnReq',
     'group_header': group_header('GrpHdr'),
     'mandate': [mandate('Mndt')],
@@ -17,6 +21,10 @@ mandate_initation_request = {
 }
 
 mandate_amendment_request = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:pain.010.001.05',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
     '_self': 'MndtAmdmntReq',
     'group_header': group_header('GrpHdr'),
     'amendment': [{
@@ -40,6 +48,10 @@ mandate_amendment_request = {
 }
 
 mandate_cancellation_request = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:pain.011.001.05',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
     '_self': 'MndtCxlReq',
     'group_header': group_header('GrpHdr'),
     'cancellatiion': [{

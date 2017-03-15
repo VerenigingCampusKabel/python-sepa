@@ -7,7 +7,7 @@ def reverse(structure, name = ''):
     }
 
     for child in structure:
-        if child != '_self':
+        if not child.startswith('_'):
             sub = structure[child]
 
             if isinstance(sub, list):

@@ -4,8 +4,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 import unittest
 from lxml import etree
-from sepa import builder, parser
-from util import xml_compare
+from sepa import builder, parser, validator
+from .util import xml_compare
 
 data_object = {
     'group_header': {
@@ -49,11 +49,23 @@ data_xml = ('<MndtInitnReq>'
 
 class TestSuite(unittest.TestSuite):
     def test_builder(self):
+        # Build XML
         data_out = builder.build(builder.mandate_initation_request, data_object)
+
+        # TODO: remove debug pritn
+        print(etree.tostring(builder.build_document(builder.mandate_initation_request, data_out)))
+
+        # Validate using XML Schema Definition (XSD)
+        assert validator.validate_or_error(validator.mandate_initation_request, builder.build_document(builder.mandate_initation_request, data_out))
+
+        # Compare generated data to expected output
         assert xml_compare(data_out, etree.fromstring(data_xml))
 
     def test_parser(self):
+        # Parse XML
         data_out = parser.parse(parser.mandate_initation_request, etree.fromstring(data_xml))
+
+        # Compare generated data to expected output
         assert data_out == data_object
 
 if __name__ == '__main__':

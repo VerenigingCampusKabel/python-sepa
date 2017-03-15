@@ -14,7 +14,7 @@ def build(structure, data):
     tag = etree.Element(structure['_self'])
 
     for child in structure:
-        if child != '_self' and child in data:
+        if not child.startswith('_') and child in data:
             subdata = data[child]
 
             if isinstance(structure[child], list):
@@ -27,3 +27,8 @@ def build(structure, data):
                 tag.append(build_child(structure[child], subdata))
 
     return tag
+
+def build_document(structure, tree):
+    root = etree.Element('Document', nsmap=structure['_namespaces'])
+    root.append(tree)
+    return root
