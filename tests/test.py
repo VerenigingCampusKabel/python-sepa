@@ -52,14 +52,18 @@ class TestSuite(unittest.TestSuite):
         # Build XML
         data_out = builder.build(builder.mandate_initation_request, data_object)
 
+        # Compare generated data to expected output
+        assert xml_compare(data_out, etree.fromstring(data_xml))
+
+    def test_validator(self):
+        # Build XML
+        data_out = builder.build(builder.mandate_initation_request, data_object)
+
         # TODO: remove debug pritn
         print(etree.tostring(builder.build_document(builder.mandate_initation_request, data_out)))
 
         # Validate using XML Schema Definition (XSD)
-        assert validator.validate_or_error(validator.mandate_initation_request, builder.build_document(builder.mandate_initation_request, data_out))
-
-        # Compare generated data to expected output
-        assert xml_compare(data_out, etree.fromstring(data_xml))
+        assert not validator.validate_or_error(validator.mandate_initation_request, builder.build_document(builder.mandate_initation_request, data_out))
 
     def test_parser(self):
         # Parse XML
