@@ -3,14 +3,13 @@ from .messages import mandate_initation_request, mandate_amendment_request, mand
 
 def build_child(structure, data):
     if isinstance(structure, dict):
-        return build(structure, data)
+        return build_tree(structure, data)
     else:
         tag = etree.Element(structure)
         tag.text = data
         return tag
 
-
-def build(structure, data):
+def build_tree(structure, data):
     tag = etree.Element(structure['_self'])
 
     for child in structure:
@@ -28,7 +27,11 @@ def build(structure, data):
 
     return tag
 
-def build_document(structure, tree):
+def build(structure, data, document=True):
+    tree = build_tree(structure, data)
     root = etree.Element('Document', nsmap=structure['_namespaces'])
     root.append(tree)
     return root
+
+def build_string(structure, data, document=True):
+    return etree.tostring(build(structure, data, document))

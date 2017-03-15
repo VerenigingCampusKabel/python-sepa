@@ -30,7 +30,7 @@ mandate_initation_request = reverse(mir)
 mandate_amendment_request = reverse(mar)
 mandate_cancellation_request = reverse(mcr)
 
-def parse(structure, tag):
+def parse_tree(structure, tag):
     data = {}
 
     for child in tag:
@@ -40,7 +40,7 @@ def parse(structure, tag):
             # print(substructure[0])
             if isinstance(substructure[0], dict):
                 key = substructure[0]['_self']
-                value = parse(substructure[0], child)
+                value = parse_tree(substructure[0], child)
             else:
                 # print('NOPENOPENOPE', type(substructure[0]))
                 key = substructure[0]
@@ -56,3 +56,11 @@ def parse(structure, tag):
             data[substructure] = child.text
 
     return data
+
+def parse(structure, tree):
+    if tree.tag == 'Document':
+        return parse_tree(structure, tree.child[0])
+    return parse_tree(structure, tree)
+
+def parse_string(structure, tree):
+    return parse(structure, etree.fromstring(tree))

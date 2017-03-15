@@ -33,7 +33,7 @@ data_in = {
     }]
 }
 
-data_out = builder.build(builder.mandate_initation_request, data_in)
+data_out = builder.build_string(builder.mandate_initation_request, data_in)
 print(data_out)
 ```
 
@@ -53,6 +53,6 @@ data_in = ('<MndtInitnReq>'
     '</Mndt>'
 '</MndtInitnReq>')
 
-data_out = parser.parse(parser.mandate_initation_request, data_in)
+data_out = parser.parse_string(parser.mandate_initation_request, data_in)
 print(data_out)
 ```
