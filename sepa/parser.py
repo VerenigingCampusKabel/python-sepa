@@ -62,5 +62,5 @@ def parse(structure, tree):
         return parse_tree(structure, tree.child[0])
     return parse_tree(structure, tree)
 
-def parse_string(structure, tree):
-    return parse(structure, etree.fromstring(tree))
+def parse_string(structure, tree, **kwargs):
+    return parse(structure, etree.fromstring(tree, **kwargs))

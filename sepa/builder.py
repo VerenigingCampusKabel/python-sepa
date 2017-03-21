@@ -29,9 +29,11 @@ def build_tree(structure, data):
 
 def build(structure, data, document=True):
     tree = build_tree(structure, data)
-    root = etree.Element('Document', nsmap=structure['_namespaces'])
-    root.append(tree)
-    return root
+    if document:
+        root = etree.Element('Document', nsmap=structure['_namespaces'])
+        root.append(tree)
+        return root
+    return tree
 
-def build_string(structure, data, document=True):
-    return etree.tostring(build(structure, data, document))
+def build_string(structure, data, document=True, **kwargs):
+    return etree.tostring(build(structure, data, document), **kwargs)

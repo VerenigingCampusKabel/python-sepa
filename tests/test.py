@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 import unittest
 from lxml import etree
-from sepa import builder, parser, validator
+from sepa import builder, parser, validator, signer
 from .util import xml_compare
 
 data_object = {
@@ -64,6 +64,20 @@ class TestSuite(unittest.TestSuite):
 
         # Validate using XML Schema Definition (XSD)
         assert not validator.validate_or_error(validator.mandate_initation_request, data_out)
+
+    def test_signer(self):
+        # Build XML
+        data_out = builder.build(builder.mandate_initation_request, data_object)
+
+        # Sign XML
+        with open('key.pem') as f:
+            key = f.read()
+        with open('cert.cer') as f:
+            cert = f.read()
+        data_signed = signer.sign(data_out, key=key, cert=cert)
+
+        # Verify XML
+        assert signer.verify(data_signed)
 
     def test_parser(self):
         # Parse XML
