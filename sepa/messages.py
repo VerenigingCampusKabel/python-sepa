@@ -1,4 +1,5 @@
 from .general import code_or_proprietary, group_header, party
+from .payment import payment_group_header, payment
 from .mandate import mandate
 
 def original_message(tag):
@@ -8,6 +9,17 @@ def original_message(tag):
         'message_name_id': 'MsgNmId',
         'creation_date_time': 'CreDtTm'
     }
+
+customer_direct_debit_initiation = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:pain.008.001.07',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
+    '_self': 'CstmrDrctDbtInitn',
+    'group_header': payment_group_header('GrpHdr'),
+    'payments': [payment('PmtInf')],
+    'supplementary_data': ['SplmtryData']
+}
 
 mandate_initation_request = {
     '_namespaces': {
