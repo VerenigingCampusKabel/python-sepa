@@ -8,7 +8,7 @@ with open('LICENSE.md') as f:
 
 setup(
     name='sepa',
-    version='0.2.3',
+    version='0.2.4',
     description='Python library for parsing and building SEPA Direct Debit and SEPA eMandate schemas.',
     long_description=readme,
     license=license,
@@ -20,6 +20,6 @@ setup(
     test_suite='nose.collector',
     tests_require=['deep', 'xmltodict', 'nose'],
     package_data={
-        'sepa': ['*.xsd']
+        'sepa': ['schemas/*.xsd']
     }
 )
