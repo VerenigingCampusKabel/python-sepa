@@ -20,7 +20,7 @@ def build_tree(structure, data):
     if '_attribs' in structure:
         if isinstance(data, dict) and '_attribs' in data:
             for key, value in data['_attribs'].items():
-                tag.attribs[structure['_attribs'][key]] = value
+                tag.attrib[structure['_attribs'][key]] = value
 
     # Skip adding children if it's a text element
     if '_nochildren' in structure:

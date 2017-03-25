@@ -157,7 +157,7 @@ def payment(tag):
         '_self': tag,
         '_sorting': [
             'PmtInfId', 'PmtMtd', 'BtchBookg', 'NbOfTxs', 'CtrlSum', 'PmtTpInf', 'ReqdColltnDt', 'Cdtr', 'CdtrAcct', 'CdtrAgt', 'CdtrAgtAcct', 'UltmtCdtr',
-            'ChrgsBr', 'ChrgsAcct', 'ChrgsAcctAgt', 'CdtrSchmeId', 'DrctDbtTxInf', 'SplmtryData'
+            'ChrgBr', 'ChrgsAcct', 'ChrgsAcctAgt', 'CdtrSchmeId', 'DrctDbtTxInf', 'SplmtryData'
         ],
         'id': 'PmtInfId',
         'method': 'PmtMtd',

@@ -63,7 +63,7 @@ def party(tag):
         },
         'country': 'CtryOfRes',
         'contact_details': {
-            '_self': 'CtcDtls',
+            '_self': 'CtctDtls',
             '_sorting': ['NmPrfx', 'Nm', 'PhneNb', 'MobNb', 'FaxNb', 'EmailAdr', 'Othr'],
             'name_prefix': 'NmPrfx',
             'name': 'Nm',
