@@ -7,7 +7,7 @@ def payment_group_header(tag):
         'creation_date_time': 'CreDtTm',
         'authorisation': code_or_proprietary('Authstn'),
         'transaction_count': 'NbOfTxs',
-        'control_sum': 'CtrlSum'
+        'control_sum': 'CtrlSum',
         'initiating_party': party('InitgPty'),
         'forwarding_agent': agent('FwdgAgt')
     }
@@ -115,7 +115,7 @@ def transaction(tag):
             '_self': 'RmtInf',
             'unstructured': 'Ustrd',
             'structured': {
-                '_self': 'Strd'
+                '_self': 'Strd',
                 # TODO: structured remittance information object,
                 'additional_information': ['AddtlRmtInf']
             }
