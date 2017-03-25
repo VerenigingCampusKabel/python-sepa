@@ -35,7 +35,7 @@ def address(tag):
 def party(tag):
     return {
         '_self': tag,
-        '_sorting': ['Nm', 'PstlAdr', 'Id', 'CtryOfRes', 'CtcDtls'],
+        '_sorting': ['Nm', 'PstlAdr', 'Id', 'CtryOfRes', 'CtctDtls'],
         'name': 'Nm',
         'postal_address': address('PstlAdr'),
         'id': {

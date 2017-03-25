@@ -171,7 +171,7 @@ def payment(tag):
         'creditor_agent': agent('CdtrAgt'),
         'creditor_agent_account': account('CdtrAgtAcct'),
         'ultimate_creditor': party('UltmtCdtr'),
-        'charge_bearer': 'ChrgsBr',
+        'charge_bearer': 'ChrgBr',
         'charges_account': account('ChrgsAcct'),
         'charges_account_agent': agent('ChrgsAcctAgt'),
         'creditor_scheme_identification': party('CdtrSchmeId'),
