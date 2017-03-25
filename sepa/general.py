@@ -1,6 +1,7 @@
 def code_or_proprietary(tag):
     return {
         '_self': tag,
+        '_sorting': ['Cd', 'Prtry'],
         'code': 'Cd',
         'proprietary': 'Prtry'
     }
@@ -8,6 +9,7 @@ def code_or_proprietary(tag):
 def other(tag):
     return [{
         '_self': tag,
+        '_sorting': ['Id', 'SchmeNm', 'Issr'],
         'id': 'Id',
         'scheme_name': code_or_proprietary('SchmeNm'),
         'issuer': 'Issr'
@@ -16,6 +18,7 @@ def other(tag):
 def address(tag):
     return {
         '_self': tag,
+        '_sorting': ['AdrTp', 'Dept', 'SubDept', 'StrtNm', 'BldgNb', 'PstCd', 'TwnNm', 'CtrySubDvsn', 'Ctry', 'AdrLine'],
         'address_type': 'AdrTp',
         'department': 'Dept',
         'sub_department': 'SubDept',
@@ -32,19 +35,24 @@ def address(tag):
 def party(tag):
     return {
         '_self': tag,
+        '_sorting': ['Nm', 'PstlAdr', 'Id', 'CtryOfRes', 'CtcDtls'],
         'name': 'Nm',
         'postal_address': address('PstlAdr'),
         'id': {
             '_self': 'Id',
+            '_sorting': ['OrgId', 'PrvtId'],
             'organisation': {
                 '_self': 'OrgId',
+                '_sorting': ['AnyBIC', 'Othr'],
                 'any_bic': 'AnyBIC',
                 'other': other('Othr')
             },
             'private': {
                 '_self': 'PrvtId',
+                '_sorting': ['DtAndPlcOfBirth', 'Othr'],
                 'birth': {
                     '_self': 'DtAndPlcOfBirth',
+                    '_sorting': ['BirthDt', 'PrvcOfBirth', 'CityOfBirth', 'CtryOfBirth'],
                     'date': 'BirthDt',
                     'province': 'PrvcOfBirth',
                     'city': 'CityOfBirth',
@@ -56,6 +64,7 @@ def party(tag):
         'country': 'CtryOfRes',
         'contact_details': {
             '_self': 'CtcDtls',
+            '_sorting': ['NmPrfx', 'Nm', 'PhneNb', 'MobNb', 'FaxNb', 'EmailAdr', 'Othr'],
             'name_prefix': 'NmPrfx',
             'name': 'Nm',
             'phone_number': 'PhneNb',
@@ -69,8 +78,10 @@ def party(tag):
 def account(tag):
     return {
         '_self': tag,
+        '_sorting': ['Id', 'Tp', 'Ccy', 'Nm'],
         'id': {
             '_self': 'Id',
+            '_sorting': ['IBAN', 'Othr'],
             'iban': 'IBAN',
             'other': other('Othr')
         },
@@ -82,11 +93,15 @@ def account(tag):
 def agent(tag):
     return {
         '_self': tag,
+        '_sorting': ['FinInstnId', 'BrnchId'],
         'financial_institution': {
             '_self': 'FinInstnId',
+            '_sorting': ['BICFI', 'BIC', 'ClrSysMmdId', 'Nm', 'PstlAdr', 'Othr'],
             'bicfi': 'BICFI',
+            'bic': 'BIC',
             'clearing_system_member': {
                 '_self': 'ClrSysMmdId',
+                '_sorting': ['ClrSysId', 'MmbId'],
                 'id': code_or_proprietary('ClrSysId'),
                 'membmer_id': 'MmbId'
             },
@@ -96,6 +111,7 @@ def agent(tag):
         },
         'branch': {
             '_self': 'BrnchId',
+            '_sorting': ['Id', 'Nm', 'PstlAdr'],
             'id': 'Id',
             'name': 'Nm',
             'postal_address': address('PstlAdr')
@@ -105,6 +121,7 @@ def agent(tag):
 def group_header(tag):
     return {
         '_self': tag,
+        '_sorting': ['MsgId', 'CreDtTm', 'Authstn', 'InitgPty', 'InstgAgt', 'InstdAgt'],
         'message_id': 'MsgId',
         'creation_date_time': 'CreDtTm',
         'authorisation': code_or_proprietary('Authstn'),

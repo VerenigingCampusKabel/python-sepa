@@ -5,6 +5,7 @@ from .mandate import mandate
 def original_message(tag):
     return {
         '_self': tag,
+        '_sorting': ['MsgId', 'MsgNmId', 'CreDtTm'],
         'message_id': 'MsgId',
         'message_name_id': 'MsgNmId',
         'creation_date_time': 'CreDtTm'
@@ -16,6 +17,7 @@ customer_direct_debit_initiation = {
         'xs': 'http://www.w3.org/2001/XMLSchema'
     },
     '_self': 'CstmrDrctDbtInitn',
+    '_sorting': ['GrpHdr', 'PmtInf', 'SplmtryData'],
     'group_header': payment_group_header('GrpHdr'),
     'payments': [payment('PmtInf')],
     'supplementary_data': ['SplmtryData']
@@ -27,6 +29,7 @@ mandate_initation_request = {
         'xs': 'http://www.w3.org/2001/XMLSchema'
     },
     '_self': 'MndtInitnReq',
+    '_sorting': ['GrpHdr', 'Mndt', 'SplmtryData'],
     'group_header': group_header('GrpHdr'),
     'mandate': [mandate('Mndt')],
     'supplementary_data': ['SplmtryData']
@@ -38,6 +41,7 @@ mandate_amendment_request = {
         'xs': 'http://www.w3.org/2001/XMLSchema'
     },
     '_self': 'MndtAmdmntReq',
+    '_sorting': ['GrpHdr', 'UndrlygAmdmntDtls', 'SplmtryData'],
     'group_header': group_header('GrpHdr'),
     'amendment': [{
         '_self': 'UndrlygAmdmntDtls',
@@ -65,6 +69,7 @@ mandate_cancellation_request = {
         'xs': 'http://www.w3.org/2001/XMLSchema'
     },
     '_self': 'MndtCxlReq',
+    '_sorting': ['GrpHdr', 'UndrlygCxlDtls', 'SplmtryData'],
     'group_header': group_header('GrpHdr'),
     'cancellatiion': [{
         '_self': 'UndrlygCxlDtls',
