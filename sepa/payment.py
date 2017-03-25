@@ -39,14 +39,20 @@ def transaction(tag):
             'end_to_end': 'EndToEndId'
         },
         'type': type_information('PmtTpInf'),
-        'amount': 'InstdAmt', # TODO: deal with currency attribute
+        'amount': {
+            '_self': 'InstdAmt',
+            '_attribs': {
+                'currency': 'Ccy'
+            },
+            '_nochildren': True
+        },
         'charge_bearer': 'ChrgsBr',
         'transaction': {
             '_self': 'DrctDbtTx',
             '_sorting': ['MndtRltdInf', 'CdtrSchmeId', 'PreNtfctnId', 'PreNtfctnDt'],
             'mandate': {
                 '_self': 'MndtRltdInf',
-                '_sorting': ['MndtId', 'DtOfSgntr', 'AmdmntInd', 'AmdmntInfDtls', 'ElctmcSgntr', 'FrstColltnDt', 'FnlColltnDt', 'Frqcy', 'Rsn', 'TrckgDays']
+                '_sorting': ['MndtId', 'DtOfSgntr', 'AmdmntInd', 'AmdmntInfDtls', 'ElctmcSgntr', 'FrstColltnDt', 'FnlColltnDt', 'Frqcy', 'Rsn', 'TrckgDays'],
                 'id': 'MndtId',
                 'date': 'DtOfSgntr',
                 'amendment_indicator': 'AmdmntInd',
@@ -112,8 +118,8 @@ def transaction(tag):
             }
         }],
         'tax': {
-            '_self': 'Tax'
-            '_sorting': None,
+            '_self': 'Tax',
+            '_sorting': None
             # TODO: tax object
         },
         'related_remittance_information': [{

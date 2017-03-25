@@ -16,6 +16,17 @@ def build_child(structure, data):
 def build_tree(structure, data):
     tag = etree.Element(structure['_self'])
 
+    # Add tag attributes
+    if '_attribs' in structure:
+        if isinstance(data, dict) and '_attribs' in data:
+            for key, value in data['_attribs'].items():
+                tag.attribs[structure['_attribs'][key]] = value
+
+    # Skip adding children if it's a text element
+    if '_nochildren' in structure:
+        tag.text = data['_value'] if '_value' in data else ''
+        return tag
+
     for child in structure:
         if not child.startswith('_') and child in data:
             subdata = data[child]
@@ -28,6 +39,10 @@ def build_tree(structure, data):
                     tag.append(build_child(structure[child][0], subdata))
             else:
                 tag.append(build_child(structure[child], subdata))
+
+    # Sort the child elements
+    if '_sorting' in structure:
+        tag[:] = sorted(tag, key=lambda element: structure['_sorting'].index(element.tag))
 
     return tag
 
