@@ -1,7 +1,7 @@
 from lxml import etree
 from .messages import\
     customer_direct_debit_initiation,\
-    mandate_initation_request,\
+    mandate_initiation_request,\
     mandate_amendment_request,\
     mandate_cancellation_request
 

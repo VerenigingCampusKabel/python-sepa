@@ -23,7 +23,7 @@ customer_direct_debit_initiation = {
     'supplementary_data': ['SplmtryData']
 }
 
-mandate_initation_request = {
+mandate_initiation_request = {
     '_namespaces': {
         None: 'urn:iso:std:iso:20022:tech:xsd:pain.009.001.05',
         'xs': 'http://www.w3.org/2001/XMLSchema'

@@ -50,24 +50,24 @@ data_xml = ('<MndtInitnReq>'
 class TestSuite(unittest.TestSuite):
     def test_builder(self):
         # Build XML
-        data_out = builder.build(builder.mandate_initation_request, data_object, document=False)
+        data_out = builder.build(builder.mandate_initiation_request, data_object, document=False)
 
         # Compare generated data to expected output
         assert xml_compare(data_out, etree.fromstring(data_xml))
 
     def test_validator(self):
         # Build XML
-        data_out = builder.build(builder.mandate_initation_request, data_object)
+        data_out = builder.build(builder.mandate_initiation_request, data_object)
 
         # TODO: remove debug print
         print(etree.tostring(data_out))
 
         # Validate using XML Schema Definition (XSD)
-        # assert not validator.validate_or_error(validator.mandate_initation_request, data_out)
+        # assert not validator.validate_or_error(validator.mandate_initiation_request, data_out)
 
     def test_signer(self):
         # Build XML
-        data_out = builder.build(builder.mandate_initation_request, data_object)
+        data_out = builder.build(builder.mandate_initiation_request, data_object)
 
         # Sign XML
         with open(os.path.join(os.path.dirname(__file__), 'privkey3.pem'), 'rb') as f:
@@ -85,7 +85,7 @@ class TestSuite(unittest.TestSuite):
 
     def test_parser(self):
         # Parse XML
-        data_out = parser.parse(parser.mandate_initation_request, etree.fromstring(data_xml))
+        data_out = parser.parse(parser.mandate_initiation_request, etree.fromstring(data_xml))
 
         # Compare generated data to expected output
         assert data_out == data_object
