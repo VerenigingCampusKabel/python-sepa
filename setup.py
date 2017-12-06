@@ -16,7 +16,7 @@ setup(
     author_email='info@vck.utwente.nl',
     url='https://github.com/VerenigingCampusKabel/python-sepa',
     packages=find_packages(exclude=('tests')),
-    install_requires=['lxml', 'signxml'],
+    install_requires=['lxml >= 3.5.0, < 4', 'signxml'],
     test_suite='nose.collector',
     tests_require=['deep', 'xmltodict', 'nose'],
     package_data={
