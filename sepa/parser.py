@@ -1,5 +1,10 @@
 from lxml import etree
-from .messages import mandate_initiation_request as mir, mandate_amendment_request as mar, mandate_cancellation_request as mcr
+from .messages import\
+    bank_to_customer_statement as btcs,\
+    customer_direct_debit_initiation as cddi,\
+    mandate_initiation_request as mir,\
+    mandate_amendment_request as mar,\
+    mandate_cancellation_request as mcr
 
 def reverse(structure, name = ''):
     new_structure = {
@@ -26,6 +31,8 @@ def reverse(structure, name = ''):
     return new_structure
 
 # Reverse message structures
+bank_to_customer_statement = reverse(btcs)
+customer_direct_debit_initiation = reverse(cddi)
 mandate_initiation_request = reverse(mir)
 mandate_amendment_request = reverse(mar)
 mandate_cancellation_request = reverse(mcr)

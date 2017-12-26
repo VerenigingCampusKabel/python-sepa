@@ -1,6 +1,11 @@
 import os
 from lxml import etree
 
+bank_to_customer_account_report = 'camt.052.001.06.xsd'
+bank_to_customer_statement = 'camt.053.001.06.xsd'
+bank_to_customer_debit_credit_notification = 'camt.054.001.06.xsd'
+account_reporting_request = 'camt.060.001.03.xsd'
+
 customer_credit_transfer_initiation = 'pain.001.001.08.xsd'
 customer_payment_status_report = 'pain.002.001.08.xsd'
 customer_payment_reversal = 'pain.007.001.07.xsd'
