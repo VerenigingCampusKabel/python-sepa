@@ -7,7 +7,7 @@ The ultimate goal of this library is to support all [ISO 20022 Payments messages
 ## Supported messages
 - Cash Management (CAMT)
   - [ ] Bank To Customer Account Report v6 (camt.052.001.06)
-  - [ ] Bank To Customer Statement v6 (camt.053.001.06)
+  - [x] Bank To Customer Statement v6 (camt.053.001.06)
   - [ ] Bank To Customer Debit Credit Notification v6 (camt.054.001.06)
   - [ ] Account Reporting Request v3 (camt.060.001.03)
 - Payments Initiation (PAIN)
