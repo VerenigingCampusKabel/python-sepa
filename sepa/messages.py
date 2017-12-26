@@ -1,6 +1,7 @@
-from .general import code_or_proprietary, group_header, party
+from .general import code_or_proprietary, party
+from .statement import statement_group_header, statement
 from .payment import payment_group_header, payment
-from .mandate import mandate
+from .mandate import mandate_group_header, mandate
 
 def original_message(tag):
     return {
@@ -42,7 +43,7 @@ mandate_initiation_request = {
     },
     '_self': 'MndtInitnReq',
     '_sorting': ['GrpHdr', 'Mndt', 'SplmtryData'],
-    'group_header': group_header('GrpHdr'),
+    'group_header': mandate_group_header('GrpHdr'),
     'mandate': [mandate('Mndt')],
     'supplementary_data': ['SplmtryData']
 }
@@ -54,7 +55,7 @@ mandate_amendment_request = {
     },
     '_self': 'MndtAmdmntReq',
     '_sorting': ['GrpHdr', 'UndrlygAmdmntDtls', 'SplmtryData'],
-    'group_header': group_header('GrpHdr'),
+    'group_header': mandate_group_header('GrpHdr'),
     'amendment': [{
         '_self': 'UndrlygAmdmntDtls',
         'original_message': original_message('OrgnlMsgInf'),
@@ -82,7 +83,7 @@ mandate_cancellation_request = {
     },
     '_self': 'MndtCxlReq',
     '_sorting': ['GrpHdr', 'UndrlygCxlDtls', 'SplmtryData'],
-    'group_header': group_header('GrpHdr'),
+    'group_header': mandate_group_header('GrpHdr'),
     'cancellatiion': [{
         '_self': 'UndrlygCxlDtls',
         'original_message': original_message('OrgnlMsgInf'),

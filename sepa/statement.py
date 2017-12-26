@@ -308,7 +308,7 @@ def entry(tag):
                     '_sorting': ['AccptncDtTm', 'TradActvtyCtrctlSttlmDt', 'TradDt', 'IntrBkSttlmDt', 'StartDt', 'EndDt', 'TxDtTm', 'Prtry'],
                     'acceptance_date_time': 'AccptncDtTm',
                     'trade_activity_contractual_settlement_date': 'TradActvtyCtrctlSttlmDt',
-                    'trade_date': 'TradDt'
+                    'trade_date': 'TradDt',
                     'interbank_settlement_date': 'IntrBkSttlmDt',
                     'start_date': 'StartDt',
                     'end_date': 'EndDt',
@@ -328,7 +328,7 @@ def entry(tag):
                         '_sorting': ['Tp', 'Val'],
                         'type': {
                             '_self': 'Tp',
-                            '_sorting': ['Yldd', 'ValTp']
+                            '_sorting': ['Yldd', 'ValTp'],
                             'yielded': 'Yldd',
                             'value_type': 'ValTp'
                         },

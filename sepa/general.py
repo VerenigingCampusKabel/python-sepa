@@ -118,15 +118,3 @@ def account(tag):
         'name': 'Nm',
         'servicer': agent('Svcr')
     }
-
-def group_header(tag):
-    return {
-        '_self': tag,
-        '_sorting': ['MsgId', 'CreDtTm', 'Authstn', 'InitgPty', 'InstgAgt', 'InstdAgt'],
-        'message_id': 'MsgId',
-        'creation_date_time': 'CreDtTm',
-        'authorisation': code_or_proprietary('Authstn'),
-        'initiating_party': party('InitgPty'),
-        'instructing_agent': agent('InstgAgt'),
-        'instructed_agent': agent('InstdAgt')
-    }
