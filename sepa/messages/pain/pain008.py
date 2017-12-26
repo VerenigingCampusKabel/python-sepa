@@ -1,3 +1,5 @@
+from sepa.definitions.payment import payment_group_header, payment
+
 # PAIN.008.001.07 - Customer Direct Debit Initiation v7
 standard = 'pain.008.001.07'
 name = 'customer_direct_debit_initiation'

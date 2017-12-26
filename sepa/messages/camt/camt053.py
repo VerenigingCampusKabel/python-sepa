@@ -1,13 +1,4 @@
-def _statement_group_header(tag):
-    return {
-        '_self': tag
-    }
-
-def _statement(tag):
-    return {
-        '_self': tag
-    }
-
+from sepa.definitions.statement import statement_group_header, statement
 
 # CAMT.053.001.06 - Bank To Customer Statement v6
 standard = 'camt.053.001.06'
@@ -19,7 +10,7 @@ definition = {
     },
     '_self': 'BkToCstmrStmt',
     '_sorting': ['GrpHdr', 'Stmt', 'SplmtryData'],
-    'group_header': _statement_group_header('GrpHdr'),
-    'statements': [_statement('Stmt')],
+    'group_header': statement_group_header('GrpHdr'),
+    'statements': [statement('Stmt')],
     'supplementary_data': ['SplmtryData']
 }

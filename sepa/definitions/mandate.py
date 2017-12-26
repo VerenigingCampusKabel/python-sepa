@@ -1,13 +1,4 @@
-from .general import code_or_proprietary, other, address, party, account, agent
-
-def original_message(tag):
-    return {
-        '_self': tag,
-        '_sorting': ['MsgId', 'MsgNmId', 'CreDtTm'],
-        'message_id': 'MsgId',
-        'message_name_id': 'MsgNmId',
-        'creation_date_time': 'CreDtTm'
-    }
+from .general import code_or_proprietary, party, account, agent
 
 def mandate_group_header(tag):
     return {
@@ -19,6 +10,15 @@ def mandate_group_header(tag):
         'initiating_party': party('InitgPty'),
         'instructing_agent': agent('InstgAgt'),
         'instructed_agent': agent('InstdAgt')
+    }
+
+def original_message(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['MsgId', 'MsgNmId', 'CreDtTm'],
+        'message_id': 'MsgId',
+        'message_name_id': 'MsgNmId',
+        'creation_date_time': 'CreDtTm'
     }
 
 def mandate(tag):

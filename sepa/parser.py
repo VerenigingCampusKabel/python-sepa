@@ -1,10 +1,5 @@
 from lxml import etree
-from .messages import\
-    bank_to_customer_statement as btcs,\
-    customer_direct_debit_initiation as cddi,\
-    mandate_initiation_request as mir,\
-    mandate_amendment_request as mar,\
-    mandate_cancellation_request as mcr
+from .messages import sepa_messages
 
 def reverse(structure, name = ''):
     new_structure = {
@@ -21,21 +16,18 @@ def reverse(structure, name = ''):
                 else:
                     new_structure[sub[0]] = [child]
             elif isinstance(sub, dict):
-                # if '_self' in sub:
                 new_structure[sub['_self']] = reverse(sub, child)
-                # else:
-                    # print('WEIRD WEIRD', child, sub)
             else:
                 new_structure[sub] = child
 
     return new_structure
 
-# Reverse message structures
-bank_to_customer_statement = reverse(btcs)
-customer_direct_debit_initiation = reverse(cddi)
-mandate_initiation_request = reverse(mir)
-mandate_amendment_request = reverse(mar)
-mandate_cancellation_request = reverse(mcr)
+# Export parser message types
+for group_name, group in sepa_messages.items():
+    for name, message in group.items():
+        reverse_definition = reverse(message.definition)
+        globals()[name] = reverse_definition
+        globals()[message.name] = reverse_definition
 
 def parse_tree(structure, tag):
     data = {}

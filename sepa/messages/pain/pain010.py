@@ -1,3 +1,6 @@
+from sepa.definitions.general import code_or_proprietary, party
+from sepa.definitions.mandate import mandate_group_header, original_message, mandate
+
 # PAIN.010.001.05 - Mandate Amendment Request v5
 standard = 'pain.010.001.05'
 name = 'mandate_amendment_request'

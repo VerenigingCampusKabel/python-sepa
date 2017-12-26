@@ -1,3 +1,6 @@
+from sepa.definitions.general import code_or_proprietary, party
+from sepa.definitions.mandate import mandate_group_header, original_message, mandate
+
 # PAIN.011.001.05 - Mandate Cancellation Request v5
 standard = 'pain.011.001.05'
 name = 'mandate_cancellation_request'

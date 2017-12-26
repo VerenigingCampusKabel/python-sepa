@@ -1,10 +1,11 @@
 from lxml import etree
-from .messages import\
-    bank_to_customer_statement,\
-    customer_direct_debit_initiation,\
-    mandate_initiation_request,\
-    mandate_amendment_request,\
-    mandate_cancellation_request
+from .messages import sepa_messages
+
+# Export builder message types
+for group_name, group in sepa_messages.items():
+    for name, message in group.items():
+        globals()[name] = message.definition
+        globals()[message.name] = message.definition
 
 def build_child(structure, data):
     if isinstance(structure, dict):
