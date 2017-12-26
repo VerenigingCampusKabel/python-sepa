@@ -75,21 +75,6 @@ def party(tag):
         }
     }
 
-def account(tag):
-    return {
-        '_self': tag,
-        '_sorting': ['Id', 'Tp', 'Ccy', 'Nm'],
-        'id': {
-            '_self': 'Id',
-            '_sorting': ['IBAN', 'Othr'],
-            'iban': 'IBAN',
-            'other': other('Othr')
-        },
-        'type': code_or_proprietary('Tp'),
-        'currency': 'Ccy',
-        'name': 'Nm'
-    }
-
 def agent(tag):
     return {
         '_self': tag,
@@ -116,6 +101,22 @@ def agent(tag):
             'name': 'Nm',
             'postal_address': address('PstlAdr')
         }
+    }
+
+def account(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['Id', 'Tp', 'Ccy', 'Nm', 'Svcr'],
+        'id': {
+            '_self': 'Id',
+            '_sorting': ['IBAN', 'Othr'],
+            'iban': 'IBAN',
+            'other': other('Othr')
+        },
+        'type': code_or_proprietary('Tp'),
+        'currency': 'Ccy',
+        'name': 'Nm',
+        'servicer': agent('Svcr')
     }
 
 def group_header(tag):

@@ -2,19 +2,27 @@
 
 Python library for parsing and building SEPA Direct Debit and SEPA eMandate schemas.
 
+The ultimate goal of this library is to support all [ISO 20022 Payments messages](https://www.iso20022.org/payments_messages.page), however in practice SEPA only uses a subset of these messages.
+
 ## Supported messages
-- [ ] Customer Credit Transfer Initiation v8 (pain.001.001.08)
-- [ ] Customer Payment Status Report v8 (pain.002.001.08)
-- [ ] Customer Payment Reversal v7 (pain.007.001.07)
-- [x] Customer Direct Debit Initiation v7 (pain.008.001.07)
-- [x] Mandate Initiation Request v5 (pain.009.001.05)
-- [x] Mandate Amendment Request v5 (pain.010.001.05)
-- [x] Mandate Cancellation Request v5 (pain.011.001.05)
-- [ ] Mandate Acceptance Report v5 (pain.012.001.05)
-- [ ] Creditor Payment Activation Request v6 (pain.013.001.06)
-- [ ] Creditor Payment Activation Request Status Report v6 (pain.014.001.06)
-- [ ] Mandate Copy Request v1 (pain.017.001.01)
-- [ ] Mandate Suspension Request v1 (pain.018.001.01)
+- Cash Management (CAMT)
+  - [ ] Bank To Customer Account Report v6 (camt.052.001.06)
+  - [ ] Bank To Customer Statement v6 (camt.053.001.06)
+  - [ ] Bank To Customer Debit Credit Notification v6 (camt.054.001.06)
+  - [ ] Account Reporting Request v3 (camt.060.001.03)
+- Payments Initiation (PAIN)
+  - [ ] Customer Credit Transfer Initiation v8 (pain.001.001.08)
+  - [ ] Customer Payment Status Report v8 (pain.002.001.08)
+  - [ ] Customer Payment Reversal v7 (pain.007.001.07)
+  - [x] Customer Direct Debit Initiation v7 (pain.008.001.07)
+  - [x] Mandate Initiation Request v5 (pain.009.001.05)
+  - [x] Mandate Amendment Request v5 (pain.010.001.05)
+  - [x] Mandate Cancellation Request v5 (pain.011.001.05)
+  - [ ] Mandate Acceptance Report v5 (pain.012.001.05)
+  - [ ] Creditor Payment Activation Request v6 (pain.013.001.06)
+  - [ ] Creditor Payment Activation Request Status Report v6 (pain.014.001.06)
+  - [ ] Mandate Copy Request v1 (pain.017.001.01)
+  - [ ] Mandate Suspension Request v1 (pain.018.001.01)
 
 ## Usage
 ### Building messages
@@ -35,8 +43,12 @@ data_in = {
     }]
 }
 
-data_out = builder.build_string(builder.mandate_initiation_request, data_in)
-print(data_out)
+# Returns an lxml etree object
+data_out = builder.build(builder.mandate_initiation_request, data_in)
+
+# Returns a byte string
+str_data_out = builder.build_string(builder.mandate_initiation_request, data_in)
+print(str_data_out)
 ```
 
 ### Parsing messages
@@ -58,3 +70,9 @@ data_in = ('<MndtInitnReq>'
 data_out = parser.parse_string(parser.mandate_initiation_request, data_in)
 print(data_out)
 ```
+
+### Verifying messages
+*This feature is still work in progress.*
+
+### Signing messages
+*This feature is still work in progress.*

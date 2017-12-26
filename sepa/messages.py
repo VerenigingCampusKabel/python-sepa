@@ -11,6 +11,18 @@ def original_message(tag):
         'creation_date_time': 'CreDtTm'
     }
 
+bank_to_customer_statement = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:camt.053.001.06',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
+    '_self': 'BkToCstmrStmt',
+    '_sorting': ['GrpHdr', 'Stmt', 'SplmtryData'],
+    'group_header': statement_group_header('GrpHdr'),
+    'statements': [statement('Stmt')],
+    'supplementary_data': ['SplmtryData']
+}
+
 customer_direct_debit_initiation = {
     '_namespaces': {
         None: 'urn:iso:std:iso:20022:tech:xsd:pain.008.001.07',
