@@ -1,5 +1,14 @@
 from .general import code_or_proprietary, other, address, party, account, agent
 
+def original_message(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['MsgId', 'MsgNmId', 'CreDtTm'],
+        'message_id': 'MsgId',
+        'message_name_id': 'MsgNmId',
+        'creation_date_time': 'CreDtTm'
+    }
+
 def mandate_group_header(tag):
     return {
         '_self': tag,

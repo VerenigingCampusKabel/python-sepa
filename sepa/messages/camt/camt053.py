@@ -1,0 +1,25 @@
+def _statement_group_header(tag):
+    return {
+        '_self': tag
+    }
+
+def _statement(tag):
+    return {
+        '_self': tag
+    }
+
+
+# CAMT.053.001.06 - Bank To Customer Statement v6
+standard = 'camt.053.001.06'
+name = 'bank_to_customer_statement'
+definition = {
+    '_namespaces': {
+        None: 'urn:iso:std:iso:20022:tech:xsd:camt.053.001.06',
+        'xs': 'http://www.w3.org/2001/XMLSchema'
+    },
+    '_self': 'BkToCstmrStmt',
+    '_sorting': ['GrpHdr', 'Stmt', 'SplmtryData'],
+    'group_header': _statement_group_header('GrpHdr'),
+    'statements': [_statement('Stmt')],
+    'supplementary_data': ['SplmtryData']
+}
