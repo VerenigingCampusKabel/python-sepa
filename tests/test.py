@@ -10,9 +10,9 @@ from .util import xml_compare
 data_object = {
     'group_header': {
         'message_id': '1234567890',
-        'creation_date_time': '2017-03-05 13:45',
+        'creation_date_time': '2017-03-05T13:45:00',
         'authorisation': {
-            'code': 'test123'
+            'code': 'ILEV'
         }
     },
     'mandate': [{
@@ -29,19 +29,19 @@ data_object = {
 
 data_xml = ('<MndtInitnReq>'
     '<Mndt>'
-        '<MndtId>78904536</MndtId>'
         '<Authntcn>'
             '<Dt>2017-03-05</Dt>'
             '<Chanl>'
                 '<Cd>ABC</Cd>'
             '</Chanl>'
         '</Authntcn>'
+        '<MndtId>78904536</MndtId>'
         '<MndtReqId>9823701</MndtReqId>'
     '</Mndt>'
     '<GrpHdr>'
-        '<CreDtTm>2017-03-05 13:45</CreDtTm>'
+        '<CreDtTm>2017-03-05T13:45:00</CreDtTm>'
         '<Authstn>'
-            '<Cd>test123</Cd>'
+            '<Cd>ILEV</Cd>'
         '</Authstn>'
         '<MsgId>1234567890</MsgId>'
     '</GrpHdr>'
@@ -62,24 +62,25 @@ class TestSuite(unittest.TestSuite):
         # TODO: remove debug print
         print(etree.tostring(data_out))
 
+        # TODO: uncomment this
         # Validate using XML Schema Definition (XSD)
-        # assert not validator.validate_or_error(validator.mandate_initiation_request, data_out)
+        assert not validator.validate_or_error(validator.mandate_initiation_request, data_out)
 
     def test_signer(self):
         # Build XML
         data_out = builder.build(builder.mandate_initiation_request, data_object)
 
         # Sign XML
-        with open(os.path.join(os.path.dirname(__file__), 'privkey3.pem'), 'rb') as f:
+        with open(os.path.join(os.path.dirname(__file__), 'privkey.pem'), 'rb') as f:
             key = f.read()
-        with open(os.path.join(os.path.dirname(__file__), 'cert3.pem'), 'rb') as f:
+        with open(os.path.join(os.path.dirname(__file__), 'cert.pem'), 'rb') as f:
             cert = f.read()
         data_signed = signer.sign(data_out, key=key, cert=cert)
 
+        # TODO: remove debug print
         print(etree.tostring(data_signed))
 
-        assert False
-
+        # TODO: uncomment this
         # Verify XML
         # assert signer.verify(data_signed)
 
