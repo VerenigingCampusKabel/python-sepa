@@ -46,13 +46,13 @@ def build_tree(structure, data):
 
     return tag
 
-def build(structure, data, document=True):
+def build(structure, data, document=True, namespaces=None):
     tree = build_tree(structure, data)
     if document:
-        root = etree.Element('Document', nsmap=structure['_namespaces'])
+        root = etree.Element('Document', nsmap=namespaces if namespaces != None else structure['_namespaces'])
         root.append(tree)
         return root
     return tree
 
-def build_string(structure, data, document=True, **kwargs):
-    return etree.tostring(build(structure, data, document), **kwargs)
+def build_string(structure, data, document=True, namespaces=None, **kwargs):
+    return etree.tostring(build(structure, data, document, namespaces), **kwargs)
