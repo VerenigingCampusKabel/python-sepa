@@ -33,26 +33,29 @@ def parse_tree(structure, tag):
     data = {}
 
     for child in tag:
-        substructure = structure[child.tag]
-
-        if isinstance(substructure, list):
-            # print(substructure[0])
-            if isinstance(substructure[0], dict):
-                key = substructure[0]['_self']
-                value = parse_tree(substructure[0], child)
-            else:
-                # print('NOPENOPENOPE', type(substructure[0]))
-                key = substructure[0]
-                value = child.text
-
-            # print(child.tag, key)
-            if not key in data:
-                data[key] = []
-            data[key].append(value)
-        elif isinstance(substructure, dict):
-            data[substructure['_self']] = parse(substructure, child)
+        if child.tag not in structure:
+            print('Unknown tag: "' + child.tag + '", parent: "' + tag + '"')
         else:
-            data[substructure] = child.text
+            substructure = structure[child.tag]
+
+            if isinstance(substructure, list):
+                # print(substructure[0])
+                if isinstance(substructure[0], dict):
+                    key = substructure[0]['_self']
+                    value = parse_tree(substructure[0], child)
+                else:
+                    # print('NOPENOPENOPE', type(substructure[0]))
+                    key = substructure[0]
+                    value = child.text
+
+                # print(child.tag, key)
+                if not key in data:
+                    data[key] = []
+                data[key].append(value)
+            elif isinstance(substructure, dict):
+                data[substructure['_self']] = parse(substructure, child)
+            else:
+                data[substructure] = child.text
 
     return data
 

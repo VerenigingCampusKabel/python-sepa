@@ -43,8 +43,9 @@ def party(tag):
             '_sorting': ['OrgId', 'PrvtId'],
             'organisation': {
                 '_self': 'OrgId',
-                '_sorting': ['AnyBIC', 'Othr'],
+                '_sorting': ['AnyBIC', 'BICOrBEI', 'Othr'],
                 'any_bic': 'AnyBIC',
+                'bic_or_bei': 'BICOrBEI',
                 'other': other('Othr')
             },
             'private': {
