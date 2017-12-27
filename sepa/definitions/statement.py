@@ -101,7 +101,7 @@ def amount_details(tag):
         '_self': tag,
         '_sorting': ['InstdAmt', 'TxAmt', 'CntrValAmt', 'AnncdPstngAmt', 'PrtryAmt'],
         'instructed_amount': amount('InstdAmt'),
-        'transaction_amount': amount('TxAmnt'),
+        'transaction_amount': amount('TxAmt'),
         'counter_value_amount': amount('CntrValAmt'),
         'announced_posting_amount': amount('AnncdPstngAmt'),
         'proprietary_amount': amount('PrtryAmt')
