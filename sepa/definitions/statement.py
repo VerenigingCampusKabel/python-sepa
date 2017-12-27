@@ -313,7 +313,7 @@ def entry(tag):
                 'remittance_information': {
                     '_self': 'RmtInf',
                     '_sorting': ['Ustrd', 'Strd'],
-                    'unstructed': ['Unstrd'],
+                    'unstructed': ['Ustrd'],
                     'structured': [{
                         '_self': 'Strd',
                         '_sorting': []
