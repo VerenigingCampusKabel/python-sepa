@@ -58,7 +58,7 @@ def parse_tree(structure, tag):
 
 def parse(structure, tree):
     if tree.tag == 'Document':
-        return parse_tree(structure, tree.child[0])
+        return parse_tree(structure, tree[0])
     return parse_tree(structure, tree)
 
 def parse_string(structure, tree, **kwargs):
