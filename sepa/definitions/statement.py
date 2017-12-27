@@ -295,13 +295,30 @@ def entry(tag):
                 'purpose': code_or_proprietary('Purp'),
                 'related_remittance_information': [{
                     '_self': 'RltdRmtInf',
-                    '_sorting': []
-                    # TODO
+                    '_sorting': ['RmtId', 'RmtLctnDtls'],
+                    'remittance_id': 'RmtId',
+                    'remittance_location_details': {
+                        '_self': 'RmtLctnDtls',
+                        '_sorting': ['Mtd', 'ElctrncAdr', 'PsltAdr'],
+                        'method': 'Mtd',
+                        'electronic_address': 'ElctrncAdr',
+                        'postal_address': {
+                            '_self': 'PsltAdr',
+                            '_sorting': ['Nm', 'Adr'],
+                            'name': 'Nm',
+                            'address': address('Adr')
+                        }
+                    }
                 }],
                 'remittance_information': {
                     '_self': 'RmtInf',
-                    '_sorting': []
-                    # TODO
+                    '_sorting': ['Ustrd', 'Strd'],
+                    'unstructed': ['Unstrd'],
+                    'structured': [{
+                        '_self': 'Strd',
+                        '_sorting': []
+                        # TODO
+                    }]
                 },
                 'related_dates': {
                     '_self': 'RltdDts',
