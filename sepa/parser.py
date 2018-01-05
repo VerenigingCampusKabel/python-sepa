@@ -34,7 +34,7 @@ def parse_tree(structure, tag):
 
     for child in tag:
         if child.tag not in structure:
-            print('Unknown tag: "' + child.tag + '", parent: "' + tag + '"')
+            print('Unknown tag: "' + child.tag + '", parent: "' + tag.tag + '"')
         else:
             substructure = structure[child.tag]
 
@@ -49,7 +49,7 @@ def parse_tree(structure, tag):
                     value = child.text
 
                 # print(child.tag, key)
-                if not key in data:
+                if key not in data:
                     data[key] = []
                 data[key].append(value)
             elif isinstance(substructure, dict):
