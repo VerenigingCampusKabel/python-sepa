@@ -453,7 +453,7 @@ def statement(tag):
         }],
         'transactions_summary': {
             '_self': 'TxsSummry',
-            '_sorting': ['TtlNtries', 'TtlCdtNtries', 'TtlDbNtries', 'TtlNtriesPerBkTxCd'],
+            '_sorting': ['TtlNtries', 'TtlCdtNtries', 'TtlDbtNtries', 'TtlNtriesPerBkTxCd'],
             'total_entries': {
                 '_self': 'TtlNtries',
                 '_sorting': ['NbOfNtries', 'Sum', 'TtlNetNtry'],
