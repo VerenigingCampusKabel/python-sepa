@@ -58,7 +58,7 @@ def availability(tag):
 def bank_transaction_code(tag):
     return {
         '_self': tag,
-        '_sorting': ['Dmn', 'Prtry'],
+        '_sorting': ['Domn', 'Prtry'],
         'domain': {
             '_self': 'Domn',
             '_sorting': ['Cd', 'Fmly'],
