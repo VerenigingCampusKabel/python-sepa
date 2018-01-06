@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, address, party, account, agent
+from .general import code_or_proprietary, amount_field, address, party, account, agent
 
 def pagination(tag):
     return {
@@ -83,7 +83,7 @@ def amount(tag):
         '_self': tag,
         '_sorting': ['Tp', 'Amt', 'CccyXchg'],
         'type': 'Tp',
-        'amount': 'Amt',
+        'amount': amount_field('Amt'),
         'currency_exchange': {
             '_self': 'CccyXchg',
             '_sorting': ['SrcCcy', 'TrgtCcy', 'UnitCcy', 'XchgRate', 'CtrctId', 'QtnDt'],
@@ -111,7 +111,7 @@ def interest_record(tag):
     return {
         '_self': tag,
         '_sorting': ['Amt', 'CdtDbtInd', 'Tp', 'Rate', 'FrToDt', 'Rsn', 'Tax'],
-        'amount': 'Amt',
+        'amount': amount_field('Amt'),
         'credit_debit_indicator': 'CdtDbtInd',
         'type': code_or_proprietary('Tp'),
         'rate': [{
@@ -126,7 +126,7 @@ def interest_record(tag):
             'validity': {
                 '_self': 'VldtyRg',
                 '_sorting': ['Amt', 'CdtDbtInd', 'Ccy'],
-                'amount': 'Amt',
+                'amount': amount_field('Amt'),
                 'credit_debit_indicator': 'CdtDbtInd',
                 'currency': 'Ccy'
             }
@@ -138,7 +138,7 @@ def interest_record(tag):
             '_sorting': ['Id', 'Rate', 'Amt'],
             'id': 'Id',
             'rate': 'Rate',
-            'amount': 'Amt'
+            'amount': amount_field('Amt')
         }
     }
 
@@ -150,7 +150,7 @@ def entry(tag):
             'Chrgs', 'TechInptChanl', 'Intrst', 'CardTx', 'NtryDtls', 'AddtlNtryInf'
         ],
         'reference': 'NtryRef',
-        'amount': 'Amt',
+        'amount': amount_field('Amt'),
         'credit_debit_indicator': 'CdtDbtInd',
         'reversal_indicator': 'RvslInd',
         'status': 'Sts',
@@ -198,7 +198,7 @@ def entry(tag):
                 'message_id': 'MsgId',
                 'payment_information_id': 'PmtInfId',
                 'number_of_transactions': 'NbOfTxs',
-                'total_amount': 'TtlAmt',
+                'total_amount': amount_field('TtlAmt'),
                 'credit_debit_indicator': 'CdtDbtInd'
             },
             'transactions': [{
@@ -234,7 +234,7 @@ def entry(tag):
                         'reference': 'Ref'
                     }
                 },
-                'amount': 'Amt',
+                'amount': amount_field('Amt'),
                 'credit_debit_indicator': 'CdtDbtInd',
                 'amount_details': amount_details('AmtDtls'),
                 'availability': [availability('Avlbty')],
@@ -252,7 +252,7 @@ def entry(tag):
                 'interest': {
                     '_self': 'Intrst',
                     '_sorting': ['TtlIntrstAndTaxAmt', 'Rcrd'],
-                    'total': 'TtlIntrstAndTaxAmt',
+                    'total': amount_field('TtlIntrstAndTaxAmt'),
                     'records': [interest_record('Rcrd')]
                 },
                 'related_parties': {
@@ -446,7 +446,7 @@ def statement(tag):
                 'included': 'Incl',
                 'amount': 'Amt'
             },
-            'amount': 'Amt',
+            'amount': amount_field('Amt'),
             'credit_debit_indicator': 'CdtDbtInd',
             'date': date_or_date_time('Dt'),
             'availability': [availability('Avlbty')]
@@ -462,7 +462,7 @@ def statement(tag):
                 'total_net_entry': {
                     '_self': 'TtlNetNtry',
                     '_sorting': ['Amt', 'CdtDbtInd'],
-                    'amount': 'Amt',
+                    'amount': amount_field('Amt'),
                     'credit_debit_indicator': 'CdtDbtInd'
                 }
             },
@@ -486,7 +486,7 @@ def statement(tag):
                 'total_net_entry': {
                     '_self': 'TtlNetNtry',
                     '_sorting': ['Amt', 'CdtDbtInd'],
-                    'amount': 'Amt',
+                    'amount': amount_field('Amt'),
                     'credit_debit_indicator': 'CdtDbtInd'
                 },
                 'forecast_indicator': 'FcstInd',

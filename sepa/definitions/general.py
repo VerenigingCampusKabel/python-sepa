@@ -6,6 +6,15 @@ def code_or_proprietary(tag):
         'proprietary': 'Prtry'
     }
 
+def amount_field(tag):
+    return {
+        '_self': tag
+        '_attribs': {
+            'currency': 'Ccy'
+        },
+        '_nochildren': True
+    }
+
 def other(tag):
     return [{
         '_self': tag,

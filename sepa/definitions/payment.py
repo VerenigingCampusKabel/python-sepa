@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, address, party, account, agent
+from .general import code_or_proprietary, amount_field, address, party, account, agent
 
 def payment_group_header(tag):
     return {
@@ -39,13 +39,7 @@ def transaction(tag):
             'end_to_end': 'EndToEndId'
         },
         'type': type_information('PmtTpInf'),
-        'amount': {
-            '_self': 'InstdAmt',
-            '_attribs': {
-                'currency': 'Ccy'
-            },
-            '_nochildren': True
-        },
+        'amount': amount_field('InstdAmt'),
         'charge_bearer': 'ChrgsBr',
         'transaction': {
             '_self': 'DrctDbtTx',
