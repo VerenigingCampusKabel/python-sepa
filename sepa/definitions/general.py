@@ -8,7 +8,7 @@ def code_or_proprietary(tag):
 
 def amount_field(tag):
     return {
-        '_self': tag
+        '_self': tag,
         '_attribs': {
             'currency': 'Ccy'
         },
