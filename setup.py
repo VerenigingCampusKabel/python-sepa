@@ -8,7 +8,7 @@ with open('LICENSE.md') as f:
 
 setup(
     name='sepa',
-    version='0.4.13',
+    version='0.4.14',
     description='Python library for parsing and building SEPA Direct Debit and SEPA eMandate schemas.',
     long_description=readme,
     license=license,
@@ -16,7 +16,8 @@ setup(
     author_email='info@vck.utwente.nl',
     url='https://github.com/VerenigingCampusKabel/python-sepa',
     packages=find_packages(exclude=('tests')),
-    install_requires=['lxml >= 3.5.0, < 4', 'signxml'],
+#    install_requires=['lxml >= 3.5.0, < 4', 'signxml'],
+    install_requires=['lxml'],
     test_suite='nose.collector',
     tests_require=['deep', 'xmltodict', 'nose'],
     package_data={
