@@ -19,6 +19,8 @@ def reverse(structure, name = ''):
                 new_structure[sub['_self']] = reverse(sub, child)
             else:
                 new_structure[sub] = child
+        elif child != '_self':
+            new_structure[child] = structure[child]
 
     return new_structure
 
@@ -39,21 +41,26 @@ def parse_tree(structure, tag):
             substructure = structure[child.tag]
 
             if isinstance(substructure, list):
-                # print(substructure[0])
                 if isinstance(substructure[0], dict):
                     key = substructure[0]['_self']
                     value = parse_tree(substructure[0], child)
                 else:
-                    # print('NOPENOPENOPE', type(substructure[0]))
                     key = substructure[0]
                     value = child.text
 
-                # print(child.tag, key)
                 if key not in data:
                     data[key] = []
                 data[key].append(value)
             elif isinstance(substructure, dict):
                 data[substructure['_self']] = parse(substructure, child)
+
+                if '_nochildren' in substructure and substructure['_nochildren']:
+                     data[substructure['_self']]['_value'] = child.text
+
+                     if '_attribs' in substructure:
+                         for attrib_key, attrib_value in substructure['_attribs'].items():
+                             if attrib_value in child.attrib:
+                                 data[substructure['_self']][attrib_key] = child.attrib[attrib_value]
             else:
                 data[substructure] = child.text
 
