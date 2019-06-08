@@ -51,7 +51,7 @@ def availability(tag):
             'number_of_days': 'NbOfDays',
             'actual_date': 'ActlDt'
         },
-        'amount': 'Amt',
+        'amount': amount_field('Amt'),
         'credit_debit_indicator': 'CdtDbtInd'
     }
 
@@ -353,7 +353,7 @@ def entry(tag):
                             '_self': 'Val',
                             '_sorting': ['Rate', 'Amt'],
                             'rate': 'Rate',
-                            'amount': 'Amt'
+                            'amount': amount_field('Amt')
                         }
                     },
                     'proprietary': {
@@ -444,7 +444,7 @@ def statement(tag):
                 '_self': 'CdtLine',
                 '_sorting': ['Incl', 'Amt'],
                 'included': 'Incl',
-                'amount': 'Amt'
+                'amount': amount_field('Amt')
             },
             'amount': amount_field('Amt'),
             'credit_debit_indicator': 'CdtDbtInd',
