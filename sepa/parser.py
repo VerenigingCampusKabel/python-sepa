@@ -1,3 +1,5 @@
+import logging
+
 from lxml import etree
 from .messages import sepa_messages
 
@@ -36,7 +38,7 @@ def parse_tree(structure, tag):
 
     for child in tag:
         if child.tag not in structure:
-            print('Unknown tag: "' + child.tag + '", parent: "' + tag.tag + '"')
+            logging.debug('Unknown tag: "' + child.tag + '", parent: "' + tag.tag + '"')
         else:
             substructure = structure[child.tag]
 
