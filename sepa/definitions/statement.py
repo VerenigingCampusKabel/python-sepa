@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, amount_field, address, party, account, agent
+from .general import code_or_proprietary, amount_field, address, party, account, agent, charges
 
 def pagination(tag):
     return {
@@ -11,7 +11,7 @@ def pagination(tag):
 def statement_group_header(tag):
     return {
         '_self': tag,
-        '_sorting': ['MsgId', 'CreDtTm', 'MsgRcpt', 'MsgPgntn', 'OrgnlBizQry'],
+        '_sorting': ['MsgId', 'CreDtTm', 'MsgRcpt', 'MsgPgntn', 'OrgnlBizQry', 'AddtlInf'],
         'message_id': 'MsgId',
         'creation_date_time': 'CreDtTm',
         'message_recipient': party('MsgRcpt'),
@@ -22,7 +22,8 @@ def statement_group_header(tag):
             'message_id': 'MsgId',
             'message_name_id': 'MsgNmId',
             'creation_date_time': 'CreDtTm'
-        }
+        },
+        'additional_information': 'AddtlInf',
     }
 
 def from_to_date(tag):
@@ -167,16 +168,7 @@ def entry(tag):
             'message_id': 'MsgId'
         },
         'amount_details': amount_details('AmtDtls'),
-        'charges': {
-            '_self': 'Chrgs',
-            '_sorting': ['TtlChrgsAndTaxAmt', 'Rcrd'],
-            'total': 'TtlChrgsAndTaxAmt',
-            'record': [{
-                '_self': 'Rcrd',
-                '_sorting': []
-                # TODO
-            }]
-        },
+        'charges': charges("Chrgs"),
         'technical_input_channel': code_or_proprietary('TechInptChanl'),
         'interest': {
             '_self': 'Intrst',
@@ -239,16 +231,7 @@ def entry(tag):
                 'amount_details': amount_details('AmtDtls'),
                 'availability': [availability('Avlbty')],
                 'bank_transaction_code': bank_transaction_code('BkTxCd'),
-                'charges': {
-                    '_self': 'Chrgs',
-                    '_sorting': ['TtlChrgsAndTaxAmt', 'Rcrd'],
-                    'total': 'TtlChrgsAndTaxAmt',
-                    'records': [{
-                        '_self': 'Rcrd',
-                        '_sorting': []
-                        # TODO
-                    }]
-                },
+                'charges': charges("Chrgs"),
                 'interest': {
                     '_self': 'Intrst',
                     '_sorting': ['TtlIntrstAndTaxAmt', 'Rcrd'],
@@ -316,8 +299,24 @@ def entry(tag):
                     'unstructed': ['Ustrd'],
                     'structured': [{
                         '_self': 'Strd',
-                        '_sorting': []
-                        # TODO
+                        '_sorting': ['CdtrRefInf', 'AddtlRmtInf'],
+                        'creditor_reference_information': {
+                            '_self': 'CdtrRefInf',
+                            '_sorting': ['Tp', 'Ref'],
+                            'type': {
+                                '_self': 'Tp',
+                                '_sorting': ['CdOrPrtry', 'Issr'],
+                                'document_line': {
+                                    '_self': 'CdOrPrtry',
+                                    '_sorting': ['Cd', 'Prtry'],
+                                    'code': 'Cd',
+                                    'property': 'Prtry',
+                                },
+                                'issr': 'Issr',
+                            },
+                            'reference': 'Ref',
+                        },
+                        'additional_information': ['AddtlRmtInf'],
                     }]
                 },
                 'related_dates': {
@@ -384,7 +383,7 @@ def entry(tag):
                     'original_bank_transaction_code': bank_transaction_code('OrgnlBkTxCd'),
                     'originator': party('Orgtr'),
                     'reason': code_or_proprietary('Rsn'),
-                    'additional_information': ['AddtInf']
+                    'additional_information': ['AddtlInf']
                 },
                 'coporate_action': {
                     '_self': 'CorpActn',

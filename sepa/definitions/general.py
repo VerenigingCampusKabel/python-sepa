@@ -91,11 +91,11 @@ def agent(tag):
         '_sorting': ['FinInstnId', 'BrnchId'],
         'financial_institution': {
             '_self': 'FinInstnId',
-            '_sorting': ['BICFI', 'BIC', 'ClrSysMmdId', 'Nm', 'PstlAdr', 'Othr'],
+            '_sorting': ['BICFI', 'BIC', 'ClrSysMmbId', 'Nm', 'PstlAdr', 'Othr'],
             'bicfi': 'BICFI',
             'bic': 'BIC',
             'clearing_system_member': {
-                '_self': 'ClrSysMmdId',
+                '_self': 'ClrSysMmbId',
                 '_sorting': ['ClrSysId', 'MmbId'],
                 'id': code_or_proprietary('ClrSysId'),
                 'membmer_id': 'MmbId'
@@ -116,7 +116,7 @@ def agent(tag):
 def account(tag):
     return {
         '_self': tag,
-        '_sorting': ['Id', 'Tp', 'Ccy', 'Nm', 'Svcr'],
+        '_sorting': ['Id', 'Tp', 'Ccy', 'Nm', 'Svcr', 'Ownr'],
         'id': {
             '_self': 'Id',
             '_sorting': ['IBAN', 'Othr'],
@@ -126,5 +126,31 @@ def account(tag):
         'type': code_or_proprietary('Tp'),
         'currency': 'Ccy',
         'name': 'Nm',
-        'servicer': agent('Svcr')
+        'servicer': agent('Svcr'),
+        'owner': party('Ownr')
+    }
+
+def charges(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['TtlChrgsAndTaxAmt', 'Rcrd'],
+        'total': 'TtlChrgsAndTaxAmt',
+        'record': [{
+            '_self': 'Rcrd',
+            '_sorting': ['Amt','CdtDbtInd','ChrgInclInd','Tp','Rate','Br','Agt','Tax'],
+            'amount': amount_field('Amt'),
+            'credit_debit_indicator': 'CdtDbtInd',
+            'charge_included_indicator': 'ChrgInclInd',
+            'type': 'Tp',
+            'rate': 'Rate',
+            'charge_bearer_code': 'Br',
+            'agent': agent('DbtrAgt'),
+            'tax': {
+                '_self': 'Tax',
+                '_sorting': ['Id', 'Rate', 'Amt'],
+                'id': 'Id',
+                'rate': 'Rate',
+                'amount': amount_field('Amt')
+            },
+        }],
     }

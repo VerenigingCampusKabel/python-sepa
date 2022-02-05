@@ -37,6 +37,7 @@ def parse_tree(structure, tag):
     data = {}
 
     for child in tag:
+        child.tag = etree.QName(child).localname
         if child.tag not in structure:
             logging.debug('Unknown tag: "' + child.tag + '", parent: "' + tag.tag + '"')
         else:
@@ -69,6 +70,7 @@ def parse_tree(structure, tag):
     return data
 
 def parse(structure, tree):
+    tree.tag = etree.QName(tree).localname
     if tree.tag == 'Document':
         return parse_tree(structure, tree[0])
     return parse_tree(structure, tree)
