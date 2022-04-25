@@ -379,7 +379,7 @@ def entry(tag):
                 },
                 'return_information': {
                     '_self': 'RtrInf',
-                    '_sorting': ['OrgnlBkTxCd', 'Orgtr', 'Rsn', 'AddtInf'],
+                    '_sorting': ['OrgnlBkTxCd', 'Orgtr', 'Rsn', 'AddtlInf'],
                     'original_bank_transaction_code': bank_transaction_code('OrgnlBkTxCd'),
                     'originator': party('Orgtr'),
                     'reason': code_or_proprietary('Rsn'),
