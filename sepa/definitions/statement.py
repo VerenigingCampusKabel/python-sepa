@@ -201,7 +201,7 @@ def entry(tag):
                 'total_amount': amount_field('TtlAmt'),
                 'credit_debit_indicator': 'CdtDbtInd'
             },
-            'transactions': [{
+            'transaction_details': [{
                 '_self': 'TxDtls',
                 '_sorting': [
                     'Refs', 'Amt', 'CdtDbtInd', 'AmtDtls', 'Avlbty', 'BkTxCd', 'Chrgs', 'Intrst', 'RltdPties', 'RltdAgts', 'Purp', 'RltdRmtInf', 'RmtInf',
