@@ -8,7 +8,7 @@ with open('LICENSE.md', 'r') as f:
 
 setup(
     name='sepa',
-    version='0.5.2',
+    version='0.5.3',
     description='Python library for parsing and building SEPA Direct Debit and SEPA eMandate schemas.',
     #long_description=readme,
     #long_description_content_type='text/markdown',
