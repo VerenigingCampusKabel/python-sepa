@@ -205,7 +205,7 @@ def entry(tag):
                 '_self': 'TxDtls',
                 '_sorting': [
                     'Refs', 'Amt', 'CdtDbtInd', 'AmtDtls', 'Avlbty', 'BkTxCd', 'Chrgs', 'Intrst', 'RltdPties', 'RltdAgts', 'Purp', 'RltdRmtInf', 'RmtInf',
-                    'RltdDts', 'RltdPric', 'RltdQties', 'FinInstrmId', 'Tax', 'RtrInf', 'CorpActn', 'SfkpgAcct', 'CshDpst', 'CardTx', 'AddtTxInf',
+                    'RltdDts', 'RltdPric', 'RltdQties', 'FinInstrmId', 'Tax', 'RtrInf', 'CorpActn', 'SfkpgAcct', 'CshDpst', 'CardTx', 'AddtlTxInf',
                     'SplmtryData'
                 ],
                 'refs': {
@@ -406,7 +406,7 @@ def entry(tag):
                     '_sorting': [],
                     # TODO
                 },
-                'additional_information': 'AddtTxInf',
+                'additional_information': 'AddtlTxInf',
                 'supplementary_data': ['SplmtryData']
             }]
         }],
