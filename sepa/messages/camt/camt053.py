@@ -2,6 +2,7 @@ from sepa.definitions.statement import statement_group_header, statement
 
 # CAMT.053.001.06 - Bank To Customer Statement v6
 standard = 'camt.053.001.06'
+compatible_standards = ['camt.053.001.04','camt.053.001.08']
 name = 'bank_to_customer_statement'
 definition = {
     '_namespaces': {

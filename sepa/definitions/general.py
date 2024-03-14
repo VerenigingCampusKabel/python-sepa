@@ -40,6 +40,13 @@ def address(tag):
         'address': ['AdrLine']
     }
 
+def party_compat(tag):
+    ## Since version 2019 there is always a new subelement <Pty> after Debtor/Ultimate Deptor and Creditor/Ultimate Creditor.
+    ## Here we try to be compatible with the old and new standards, until we have a better handling of different standards.
+    party_struct = party(tag)
+    party_struct['_sorting'].append('Pty')
+    party_struct['party'] = party('Pty')
+    return party_struct
 
 def party(tag):
     return {

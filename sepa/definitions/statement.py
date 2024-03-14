@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, amount_field, address, party, account, agent, charges
+from .general import code_or_proprietary, amount_field, address, party, party_compat, account, agent, charges
 
 def pagination(tag):
     return {
@@ -143,6 +143,73 @@ def interest_record(tag):
         }
     }
 
+def balance(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['Tp', 'CdtLine', 'Amt', 'CdtDbtInd', 'Dt', 'Avlbty'],
+        'type': {
+            '_self': 'Tp',
+            '_sorting': ['CdOrPrtry', 'SubTp'],
+            'code_or_proprietary': code_or_proprietary('CdOrPrtry'),
+            'sub_type': code_or_proprietary('SubTp')
+        },
+        'credit_line': {
+            '_self': 'CdtLine',
+            '_sorting': ['Incl', 'Amt'],
+            'included': 'Incl',
+            'amount': amount_field('Amt')
+        },
+        'amount': amount_field('Amt'),
+        'credit_debit_indicator': 'CdtDbtInd',
+        'date': date_or_date_time('Dt'),
+        'availability': [availability('Avlbty')]
+    }
+
+def transactions_summary(tag):
+    return {
+        '_self': tag,
+        '_sorting': ['TtlNtries', 'TtlCdtNtries', 'TtlDbtNtries', 'TtlNtriesPerBkTxCd'],
+        'total_entries': {
+            '_self': 'TtlNtries',
+            '_sorting': ['NbOfNtries', 'Sum', 'TtlNetNtry'],
+            'number_of_entries': 'NbOfNtries',
+            'sum': 'Sum',
+            'total_net_entry': {
+                '_self': 'TtlNetNtry',
+                '_sorting': ['Amt', 'CdtDbtInd'],
+                'amount': amount_field('Amt'),
+                'credit_debit_indicator': 'CdtDbtInd'
+            }
+        },
+        'total_credit_entries': {
+            '_self': 'TtlCdtNtries',
+            '_sorting': ['NbOfNtries', 'Sum'],
+            'number_of_entries': 'NbOfNtries',
+            'sum': 'Sum'
+        },
+        'total_debit_entries': {
+            '_self': 'TtlDbtNtries',
+            '_sorting': ['NbOfNtries', 'Sum'],
+            'number_of_entries': 'NbOfNtries',
+            'sum': 'Sum'
+        },
+        'total_entries_per_bank_transaction_code': {
+            '_self': 'TtlNtriesPerBkTxCd',
+            '_sorting': ['NbOfNtries', 'Sum', 'TtlNetNtry', 'FcstInd', 'BkTxCd', 'Avlbty'],
+            'number_of_entries': 'NbOfNtries',
+            'sum': 'Sum',
+            'total_net_entry': {
+                '_self': 'TtlNetNtry',
+                '_sorting': ['Amt', 'CdtDbtInd'],
+                'amount': amount_field('Amt'),
+                'credit_debit_indicator': 'CdtDbtInd'
+            },
+            'forecast_indicator': 'FcstInd',
+            'bank_transaction_code': 'BkTxCd',
+            'availability': availability('Avlbty')
+        }
+    }
+
 def entry(tag):
     return {
         '_self': tag,
@@ -203,7 +270,7 @@ def entry(tag):
                 'refs': {
                     '_self': 'Refs',
                     '_sorting': [
-                        'MsgId', 'AcctSvcrRef', 'PmtInfId', 'InstrId', 'EndToEndId', 'TxId', 'MndtId', 'ChqNb', 'ClrSysRef', 'AcctOwnrTxId', 'AcctSvcrTxId',
+                        'MsgId', 'AcctSvcrRef', 'PmtInfId', 'InstrId', 'EndToEndId', 'UETR', 'TxId', 'MndtId', 'ChqNb', 'ClrSysRef', 'AcctOwnrTxId', 'AcctSvcrTxId',
                         'MktInfrstrctrTxId', 'PrcgId', 'Prty'
                     ],
                     'message_id': 'MsgId',
@@ -211,6 +278,7 @@ def entry(tag):
                     'payment_information_id': 'PmtInfId',
                     'instruction_id': 'InstrId',
                     'end_to_end_id': 'EndToEndId',
+                    'end_to_end_uuid': 'UETR',
                     'transaction_id': 'TxId',
                     'mandate_id': 'MndtId',
                     'cheque_number': 'ChqNb',
@@ -242,12 +310,12 @@ def entry(tag):
                     '_self': 'RltdPties',
                     '_sorting': ['InitgPty', 'Dbtr', 'DbtrAcct', 'UltmtDbtr', 'Cdtr', 'CdtrAcct', 'UltmtCdtr', 'TradgPty', 'Prtry'],
                     'initiating_party': party('InitgPty'),
-                    'debtor': party('Dbtr'),
+                    'debtor': party_compat('Dbtr'),
                     'debtor_account': account('DbtrAcct'),
-                    'ultimate_debtor': party('UltmtDbtr'),
-                    'creditor': party('Cdtr'),
+                    'ultimate_debtor': party_compat('UltmtDbtr'),
+                    'creditor': party_compat('Cdtr'),
                     'creditor_account': account('CdtrAcct'),
-                    'ultimate_creditor': party('UltmtCdtr'),
+                    'ultimate_creditor': party_compat('UltmtCdtr'),
                     'trading_party': party('TradgPty'),
                     'proprietary': [{
                         '_self': 'Prtry',
@@ -430,69 +498,8 @@ def statement(tag):
         'account': account('Acct'),
         'related_account': account('RltdAcct'),
         'interest': [interest_record('Intrst')],
-        'balance': [{
-            '_self': 'Bal',
-            '_sorting': ['Tp', 'CdtLine', 'Amt', 'CdtDbtInd', 'Dt', 'Avlbty'],
-            'type': {
-                '_self': 'Tp',
-                '_sorting': ['CdOrPrtry', 'SubTp'],
-                'code_or_proprietary': code_or_proprietary('CdOrPrtry'),
-                'sub_type': code_or_proprietary('SubTp')
-            },
-            'credit_line': {
-                '_self': 'CdtLine',
-                '_sorting': ['Incl', 'Amt'],
-                'included': 'Incl',
-                'amount': amount_field('Amt')
-            },
-            'amount': amount_field('Amt'),
-            'credit_debit_indicator': 'CdtDbtInd',
-            'date': date_or_date_time('Dt'),
-            'availability': [availability('Avlbty')]
-        }],
-        'transactions_summary': {
-            '_self': 'TxsSummry',
-            '_sorting': ['TtlNtries', 'TtlCdtNtries', 'TtlDbtNtries', 'TtlNtriesPerBkTxCd'],
-            'total_entries': {
-                '_self': 'TtlNtries',
-                '_sorting': ['NbOfNtries', 'Sum', 'TtlNetNtry'],
-                'number_of_entries': 'NbOfNtries',
-                'sum': 'Sum',
-                'total_net_entry': {
-                    '_self': 'TtlNetNtry',
-                    '_sorting': ['Amt', 'CdtDbtInd'],
-                    'amount': amount_field('Amt'),
-                    'credit_debit_indicator': 'CdtDbtInd'
-                }
-            },
-            'total_credit_entries': {
-                '_self': 'TtlCdtNtries',
-                '_sorting': ['NbOfNtries', 'Sum'],
-                'number_of_entries': 'NbOfNtries',
-                'sum': 'Sum'
-            },
-            'total_debit_entries': {
-                '_self': 'TtlDbtNtries',
-                '_sorting': ['NbOfNtries', 'Sum'],
-                'number_of_entries': 'NbOfNtries',
-                'sum': 'Sum'
-            },
-            'total_entries_per_bank_transaction_code': {
-                '_self': 'TtlNtriesPerBkTxCd',
-                '_sorting': ['NbOfNtries', 'Sum', 'TtlNetNtry', 'FcstInd', 'BkTxCd', 'Avlbty'],
-                'number_of_entries': 'NbOfNtries',
-                'sum': 'Sum',
-                'total_net_entry': {
-                    '_self': 'TtlNetNtry',
-                    '_sorting': ['Amt', 'CdtDbtInd'],
-                    'amount': amount_field('Amt'),
-                    'credit_debit_indicator': 'CdtDbtInd'
-                },
-                'forecast_indicator': 'FcstInd',
-                'bank_transaction_code': 'BkTxCd',
-                'availability': availability('Avlbty')
-            }
-        },
+        'balance': [balance('Bal')],
+        'transactions_summary': transactions_summary('TxsSummry'),
         'entries': [entry('Ntry')],
         'additional_information': ['AddtlStmtInf']
     }
