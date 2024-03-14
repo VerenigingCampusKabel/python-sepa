@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, amount_field, address, party, account, agent
+from .general import code_or_proprietary, amount_field, address, party, party_compat, account, agent
 
 def payment_group_header(tag):
     return {
@@ -34,9 +34,10 @@ def transaction(tag):
         ],
         'id': {
             '_self': 'PmtId',
-            '_sorting': ['InstrId', 'EndToEndId'],
+            '_sorting': ['InstrId', 'EndToEndId', 'UETR'],
             'instruction': 'InstrId',
-            'end_to_end': 'EndToEndId'
+            'end_to_end': 'EndToEndId',
+            'end_to_end_uuid': 'UETR',
         },
         'type': type_information('PmtTpInf'),
         'amount': amount_field('InstdAmt'),
@@ -82,12 +83,12 @@ def transaction(tag):
             'pre_notification_id': 'PreNtfctnId',
             'pre_notification_date': 'PreNtfctnDt'
         },
-        'ultimate_creditor': party('UltmtCdtr'),
-        'debtor': party('Dbtr'),
+        'ultimate_creditor': party_compat('UltmtCdtr'),
+        'debtor': party_compat('Dbtr'),
         'debtor_account': account('DbtrAcct'),
         'debtor_agent': agent('DbtrAgt'),
         'debtor_agent_account': account('DbtrAgtAcct'),
-        'ultimate_debtor': party('UltmtDbtr'),
+        'ultimate_debtor': party_compat('UltmtDbtr'),
         'instruction_for_creditor_agent': 'InstrForCdtrAgt',
         'purpose': code_or_proprietary('Purp'),
         'regulatory_reporting': [{
@@ -160,11 +161,11 @@ def payment(tag):
         'control_sum': 'CtrlSum',
         'type': type_information('PmtTpInf'),
         'collection_date': 'ReqdColltnDt',
-        'creditor': party('Cdtr'),
+        'creditor': party_compat('Cdtr'),
         'creditor_account': account('CdtrAcct'),
         'creditor_agent': agent('CdtrAgt'),
         'creditor_agent_account': account('CdtrAgtAcct'),
-        'ultimate_creditor': party('UltmtCdtr'),
+        'ultimate_creditor': party_compat('UltmtCdtr'),
         'charge_bearer': 'ChrgBr',
         'charges_account': account('ChrgsAcct'),
         'charges_account_agent': agent('ChrgsAcctAgt'),

@@ -1,4 +1,4 @@
-from .general import code_or_proprietary, party, account, agent
+from .general import code_or_proprietary, party, party_compat, account, agent
 
 def mandate_group_header(tag):
     return {
@@ -76,14 +76,14 @@ def mandate(tag):
         },
         'reason': code_or_proprietary('Rsn'),
         'creditor_scheme_identification': party('CdtrSchmeId'),
-        'creditor': party('Cdtr'),
+        'creditor': party_compat('Cdtr'),
         'creditor_account': account('CdtrAcct'),
         'creditor_agent': agent('CdtrAgt'),
-        'ultimate_creditor': party('UltmtCdtr'),
-        'debtor': party('Dbtr'),
+        'ultimate_creditor': party_compat('UltmtCdtr'),
+        'debtor': party_compat('Dbtr'),
         'debtor_account': account('DbtrAcct'),
         'debtor_agent': agent('DbtrAgt'),
-        'ultimate_debtor': party('UltmtDbtr'),
+        'ultimate_debtor': party_compat('UltmtDbtr'),
         'reference': 'MndtRef',
         'referred_document': {
             '_self': 'RfrdDoc',
