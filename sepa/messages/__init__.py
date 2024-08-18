@@ -9,7 +9,7 @@ for loader, name, is_pkg in pkgutil.walk_packages(__path__):
         continue
 
     # Load message group module
-    module = loader.find_module(name).load_module(name)
+    module = loader.find_spec(name).loader.load_module(name)
 
     # Export messages from message group
     sepa_messages[name] = module.sepa_messages
