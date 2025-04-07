@@ -91,7 +91,8 @@ def parse(structure, tree):
         structure = get_structure(tree)
     if etree.QName(tree).localname == 'Document':
         data = parse_tree(structure, tree[0])
-        data['document_type'] = etree.QName(tree).namespace.split(':')[-1]
+        if etree.QName(tree).namespace:
+            data['document_type'] = etree.QName(tree).namespace.split(':')[-1]
         return data
     return parse_tree(structure, tree)
 
